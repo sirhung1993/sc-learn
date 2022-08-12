@@ -1,0 +1,772 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "claimedAt",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "claimedAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "claimedFractions",
+        "type": "uint256"
+      }
+    ],
+    "name": "ClaimCampaign",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "campaignId",
+        "type": "string"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "campaignId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "raise",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum ICampaignContract.CampaignType",
+            "name": "campaignType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fractionCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "remainFractions",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pricePerFraction",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "completed",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "goal",
+            "type": "bool"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct ICampaignContract.Campaign",
+        "name": "campaign",
+        "type": "tuple"
+      }
+    ],
+    "name": "CreateCampaign",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "fanId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "campaignId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "fractionAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "fundedAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "FundCampaign",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "campaignId",
+        "type": "string"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "campaignId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "raise",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum ICampaignContract.CampaignType",
+            "name": "campaignType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fractionCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "remainFractions",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pricePerFraction",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "completed",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "goal",
+            "type": "bool"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct ICampaignContract.Campaign",
+        "name": "campaign",
+        "type": "tuple"
+      }
+    ],
+    "name": "GoalReached",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_campaignId",
+        "type": "string"
+      }
+    ],
+    "name": "claimFixGoalReached",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_campaignId",
+        "type": "string"
+      }
+    ],
+    "name": "claimFixPartiallyReached",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_campaignId",
+        "type": "string"
+      }
+    ],
+    "name": "claimFlexGoalReached",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_campaignId",
+        "type": "string"
+      }
+    ],
+    "name": "claimFlexPartiallyReached",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "campaignId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "fanId",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "fanAddress",
+        "type": "address"
+      }
+    ],
+    "name": "claimFractionSuperfan",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "collectableCampaignsAssetWallet",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "creator",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_campaignId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_uri",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_raise",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum ICampaignContract.CampaignType",
+        "name": "_campaignType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_startDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_endDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_fractionCount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_priceFraction",
+        "type": "uint256"
+      }
+    ],
+    "name": "createCampaign",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_campaignId",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_fractionAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "investor",
+        "type": "string"
+      }
+    ],
+    "name": "fundCampaign",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_campaignId",
+        "type": "string"
+      }
+    ],
+    "name": "getCampaign",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "campaignId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "raise",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum ICampaignContract.CampaignType",
+            "name": "campaignType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fractionCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "remainFractions",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pricePerFraction",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "completed",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "goal",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct ICampaignContract.Campaign",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getCampaigns",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "campaignId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "raise",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum ICampaignContract.CampaignType",
+            "name": "campaignType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fractionCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "remainFractions",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pricePerFraction",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "completed",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "goal",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct ICampaignContract.Campaign[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_collectableCampaignsAssetWallet",
+        "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "onERC1155BatchReceived",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "onERC1155Received",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_collectableCampaignsAssetWallet",
+        "type": "address"
+      }
+    ],
+    "name": "setCollectableCampaignsAssetWallet",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_fractionContract",
+        "type": "address"
+      }
+    ],
+    "name": "setFractionContract",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_campaignId",
+        "type": "string"
+      }
+    ],
+    "name": "setGoalReached",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "vault",
+        "type": "address"
+      }
+    ],
+    "name": "setVaultWallet",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
+    ],
+    "name": "supportsInterface",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "vaultWallet",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
